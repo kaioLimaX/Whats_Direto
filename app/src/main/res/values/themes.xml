@@ -2,9 +2,11 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.WhatsappDireto" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
-        <item name="android:statusBarColor">@color/red</item>
-        <item name="android:navigationBarColor" tools:targetApi="o_mr1">@color/red</item>
+        <item name="colorPrimary">@color/color_primary</item>
+
+        <item name="android:fontFamily">@font/font_plus</item>
+        <item name="android:statusBarColor">@color/color_status_bar</item>
+        <item name="android:navigationBarColor" tools:targetApi="o_mr1">@color/color_status_bar</item>
     </style>
 
     <style name="Theme.WhatsappDireto" parent="Base.Theme.WhatsappDireto" />
