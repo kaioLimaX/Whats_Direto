@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_main"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.whatsappdireto.fragments.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/historicoFragment"
+        android:name="com.example.whatsappdireto.fragments.HistoricoFragment"
+        android:label="fragment_historico"
+        tools:layout="@layout/fragment_historico" />
+    <fragment
+        android:id="@+id/configuracoesFragment"
+        android:name="com.example.whatsappdireto.fragments.ConfiguracoesFragment"
+        android:label="fragment_configuracoes"
+        tools:layout="@layout/fragment_configuracoes" />
+</navigation>
