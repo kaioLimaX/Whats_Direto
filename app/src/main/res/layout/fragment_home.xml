@@ -16,7 +16,7 @@
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Digite o telefone com quem deseja\n entrar em contato"
+            android:text="Fale com quem deseja sem precisar\nsalvar em seus contatos"
             android:textAlignment="center"
             android:textColor="@color/color_primary"
             android:textSize="16sp"
@@ -72,6 +72,7 @@
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
             android:text="Ex: (35)9999-9999"
             android:textColor="@color/color_primary"
             app:layout_constraintStart_toStartOf="@+id/cardView"
@@ -86,6 +87,7 @@
             app:cornerRadius="8dp"
             app:layout_constraintEnd_toEndOf="@+id/cardView"
             app:layout_constraintTop_toBottomOf="@+id/cardView" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>
