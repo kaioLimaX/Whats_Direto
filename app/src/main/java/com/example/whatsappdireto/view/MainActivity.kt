@@ -1,25 +1,31 @@
-package com.example.whatsappdireto
+package com.example.whatsappdireto.view
 
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.text.Html
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI.setupWithNavController
+import com.example.whatsappdireto.R
+import com.example.whatsappdireto.controller.ContatoController
+import com.example.whatsappdireto.database.RoomDB
 import com.example.whatsappdireto.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
+
     private lateinit var navController : NavController
+
+
     val binding by lazy {
         ActivityMainBinding.inflate(layoutInflater)
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+
 
         //inicializar navegação Menu Bottom
         navController = Navigation.findNavController(this, R.id.fragmentContainerView)
@@ -32,7 +38,12 @@ class MainActivity : AppCompatActivity() {
 
 
 
+
+
+
     }
+
+
 
     private fun configToolbar() {
 
