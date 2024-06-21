@@ -6,6 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.whatsappdireto.database.dao.ContatoDAO
 import com.example.whatsappdireto.database.entity.Contato
+import com.example.whatsappdireto.database.entity.Conversor
 
 @Database(
     entities = [
@@ -13,11 +14,9 @@ import com.example.whatsappdireto.database.entity.Contato
     ],
     version = 1,
 
-)
+    )
 abstract class RoomDB : RoomDatabase() {
     abstract val contatoDAO: ContatoDAO
-
-
 
 
     companion object {
@@ -29,8 +28,9 @@ abstract class RoomDB : RoomDatabase() {
             return Room.databaseBuilder(
                 context,
                 RoomDB::class.java,
-                "projeto.db"
-            ).build()
+                "projeto.db"            )
+                .addTypeConverter(Conversor())
+                .build()
         }
     }
 }

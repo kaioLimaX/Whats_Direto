@@ -1,4 +1,4 @@
-package com.example.whatsappdireto.fragments
+package com.example.whatsappdireto.view.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
