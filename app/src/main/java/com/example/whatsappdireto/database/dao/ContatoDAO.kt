@@ -21,6 +21,6 @@ interface ContatoDAO {
     @Update
     fun atualizar(contato: Contato)
 
-    @Query("SELECT * FROM contatos ")
+    @Query("SELECT * FROM contatos ORDER BY id_contato DESC")
     fun listar(): List<Contato>
 }

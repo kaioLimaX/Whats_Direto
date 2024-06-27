@@ -17,7 +17,7 @@ class Contato (
     @ColumnInfo(name = "id_contato")
     val idContato: Long,
     @ColumnInfo(defaultValue = "")
-    val nome: String,
+    var nome: String,
     val telefone: String,
     val dataCadastro: Date?,
 )

@@ -48,6 +48,7 @@ dependencies {
     implementation("androidx.room:room-runtime:$room_version")
     kapt("androidx.room:room-compiler:$room_version")
 
+
     val ev_version = "1.0.4"
     implementation ("com.wajahatkarim:easyvalidation-core:$ev_version")
 

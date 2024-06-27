@@ -19,15 +19,24 @@ class ContatoController(
     private val roomDB = RoomDB.recuperarInstanciaRoom(context)
     private val contatoDAO = roomDB.contatoDAO
 
-    suspend fun adicionarContato(contato: Contato) = CoroutineScope(Dispatchers.IO).launch {
+     fun adicionarContato(contato: Contato) = CoroutineScope(Dispatchers.IO).launch {
         if (contato.telefone.minLength(10)) {
             contatoDAO.salvar(contato)
         }
     }
 
-    suspend fun listarUsuarios(): List<Contato> = withContext(Dispatchers.IO) {
-        contatoDAO.listar()
-    }
+         fun atualizarContato(contato: Contato)= CoroutineScope(Dispatchers.IO).launch {
+            contatoDAO.atualizar(contato)
+        }
+
+         fun removerContato(contato: Contato) = CoroutineScope(Dispatchers.IO).launch {
+           contatoDAO.remover(contato)
+        }
+
+        suspend fun listarUsuarios(): List<Contato> = withContext(Dispatchers.IO) {
+            contatoDAO.listar()
+        }
+
 }
 
 
