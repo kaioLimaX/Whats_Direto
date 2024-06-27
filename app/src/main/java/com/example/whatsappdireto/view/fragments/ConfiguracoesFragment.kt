@@ -1,12 +1,15 @@
 package com.example.whatsappdireto.view.fragments
 
+import android.content.Intent
 import android.content.res.ColorStateList
 import android.graphics.PorterDuff
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.whatsappdireto.R
@@ -38,10 +41,14 @@ class ConfiguracoesFragment : Fragment() {
         return binding.root
 
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-      iniciarSwith()
+        iniciarSwith()
+        binding.btnReportar.setOnClickListener {
+            openGmailWithSubject("Reportar um problema")
+        }
 
 
     }
@@ -50,14 +57,17 @@ class ConfiguracoesFragment : Fragment() {
 
 
         val switch = binding.swithSalvar
+
         val checkedColor = ContextCompat.getColor(requireContext(), R.color.color_primary)
+        val uncheckedColor =
+            ContextCompat.getColor(requireContext(), R.color.switchTrackUncheckedColor)
 
-        // Define a cor da bolinha quando unchecked
-        val uncheckedColor = ContextCompat.getColor(requireContext(), R.color.switchTrackUncheckedColor)
 
-        // Configura a cor da bolinha com base no estado checked
         switch.thumbTintList = ColorStateList(
-            arrayOf(intArrayOf(android.R.attr.state_checked), intArrayOf(-android.R.attr.state_checked)),
+            arrayOf(
+                intArrayOf(android.R.attr.state_checked),
+                intArrayOf(-android.R.attr.state_checked)
+            ),
             intArrayOf(checkedColor, uncheckedColor)
         )
 
@@ -67,6 +77,21 @@ class ConfiguracoesFragment : Fragment() {
         switch.setOnCheckedChangeListener { _, isChecked ->
             val newValue = if (isChecked) 1 else 0
             preferencesManager.setDefaultNumber(newValue)
+        }
+    }
+
+    fun openGmailWithSubject(subject: String) {
+        val intent = Intent(Intent.ACTION_SENDTO).apply {
+            data = Uri.parse("mailto:") // Especifica que é um intent para enviar e-mail
+            putExtra(Intent.EXTRA_SUBJECT, subject) // Define o assunto do e-mail
+            putExtra(Intent.EXTRA_EMAIL, arrayOf("caiooalexandre95@gmail.com")) // Adicione um e-mail se quiser pré-preencher o destinatário
+        }
+
+        if (intent.resolveActivity(requireContext().packageManager) != null) {
+            startActivity(intent)
+        } else {
+            // Caso não encontre um aplicativo de e-mail compatível
+            Toast.makeText(requireContext(), "Nenhum aplicativo de e-mail encontrado", Toast.LENGTH_SHORT).show()
         }
     }
 

@@ -135,7 +135,7 @@
                 android:text="Reportar um problema" />
 
             <ImageButton
-                android:id="@+id/imageButton7"
+                android:id="@+id/btnReportar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"

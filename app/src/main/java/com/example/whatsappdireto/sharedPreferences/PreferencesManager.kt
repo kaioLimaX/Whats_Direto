@@ -8,7 +8,6 @@ class PreferencesManager(context: Context) {
     private val sharedPreferences = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
 
 
-
     fun isFirstRun(): Boolean {
         return sharedPreferences.getBoolean(ContantsPreference.KEY_IS_FIRST_RUN, true)
     }
