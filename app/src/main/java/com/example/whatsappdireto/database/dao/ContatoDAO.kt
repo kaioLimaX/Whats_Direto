@@ -21,6 +21,9 @@ interface ContatoDAO {
     @Update
     fun atualizar(contato: Contato)
 
+    @Query("DELETE FROM contatos")
+    fun removerHistorico()
+
     @Query("SELECT * FROM contatos ORDER BY id_contato DESC")
     fun listar(): List<Contato>
 }

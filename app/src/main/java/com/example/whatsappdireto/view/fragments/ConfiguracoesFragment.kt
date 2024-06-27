@@ -13,8 +13,10 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.whatsappdireto.R
+import com.example.whatsappdireto.controller.ContatoController
 import com.example.whatsappdireto.controller.SharedController
 import com.example.whatsappdireto.databinding.FragmentConfiguracoesBinding
+import com.example.whatsappdireto.extensions.AlertExcluir
 import com.example.whatsappdireto.sharedPreferences.PreferencesManager
 import java.net.URLEncoder
 
@@ -27,6 +29,12 @@ class ConfiguracoesFragment : Fragment() {
     private val sharedController: SharedController by lazy {
         SharedController(preferencesManager)
     }
+
+    private val controller by lazy {
+        ContatoController(requireContext())
+    }
+
+
 
     private var _binding: FragmentConfiguracoesBinding? = null
     private val binding
@@ -49,8 +57,22 @@ class ConfiguracoesFragment : Fragment() {
         iniciarSwith()
 
         binding.btnReportar.setOnClickListener {
-            //openGmailWithSubject()
             abrirEmail("caiooalexandre95@gmail.com")
+        }
+        binding.btnPoliticas.setOnClickListener {
+            abrirLink("https://imobilead.me/lps/politica/?nome=Zap%20Direto")
+        }
+
+        binding.btnExcluirTudo.setOnClickListener {
+            val meuNovoAlert = AlertExcluir(requireContext())
+            meuNovoAlert.exibir(
+                titulo = "Excluir Historico",
+                mensagem = "Deseja excluir todos os contatos do historico?.",
+                textoBotaoConfirmar = "Excluir",
+                onConfirmar = {
+                    controller.removerHistorico()
+                }
+            )
         }
 
 
@@ -85,7 +107,7 @@ class ConfiguracoesFragment : Fragment() {
 
     fun abrirEmail(destinatario: String) {
         val assunto = "Reportar problema"
-        val corpoEmail = "Corpo do email"
+
 
         val uri = Uri.parse("mailto:$destinatario?subject=${URLEncoder.encode(assunto, "UTF-8").replace("+", "%20")}")
         val intent = Intent(Intent.ACTION_SENDTO, uri)
@@ -99,26 +121,11 @@ class ConfiguracoesFragment : Fragment() {
         }
     }
 
-    /*fun openGmailWithSubject() {
-        val emailDestinatario = "caiooalexandre95@gmail.com" // Substitua pelo seu email de suporte
-        val assunto = "Relato de problema no app [Nome do seu app]"
-        val corpoEmail = """
-    Olá,
+    fun abrirLink(url: String) {
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+        startActivity(intent)
+    }
 
-    Gostaria de relatar o seguinte problema no app:
-      
-
- 
-""".trimIndent()
-
-        val intent = Intent(Intent.ACTION_SENDTO).apply {
-            data = Uri.parse("mailto:$emailDestinatario")
-            putExtra(Intent.EXTRA_SUBJECT, assunto)
-            putExtra(Intent.EXTRA_TEXT, corpoEmail)
-        }
-
-        startActivity(Intent.createChooser(intent, "Enviar email com..."))
-    }*/
 
 
 }
