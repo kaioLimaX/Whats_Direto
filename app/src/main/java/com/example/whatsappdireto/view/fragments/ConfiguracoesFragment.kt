@@ -16,6 +16,7 @@ import com.example.whatsappdireto.R
 import com.example.whatsappdireto.controller.SharedController
 import com.example.whatsappdireto.databinding.FragmentConfiguracoesBinding
 import com.example.whatsappdireto.sharedPreferences.PreferencesManager
+import java.net.URLEncoder
 
 class ConfiguracoesFragment : Fragment() {
 
@@ -46,8 +47,10 @@ class ConfiguracoesFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         iniciarSwith()
+
         binding.btnReportar.setOnClickListener {
-            openGmailWithSubject("Reportar um problema")
+            //openGmailWithSubject()
+            abrirEmail("caiooalexandre95@gmail.com")
         }
 
 
@@ -80,20 +83,42 @@ class ConfiguracoesFragment : Fragment() {
         }
     }
 
-    fun openGmailWithSubject(subject: String) {
-        val intent = Intent(Intent.ACTION_SENDTO).apply {
-            data = Uri.parse("mailto:") // Especifica que é um intent para enviar e-mail
-            putExtra(Intent.EXTRA_SUBJECT, subject) // Define o assunto do e-mail
-            putExtra(Intent.EXTRA_EMAIL, arrayOf("caiooalexandre95@gmail.com")) // Adicione um e-mail se quiser pré-preencher o destinatário
-        }
+    fun abrirEmail(destinatario: String) {
+        val assunto = "Reportar problema"
+        val corpoEmail = "Corpo do email"
 
+        val uri = Uri.parse("mailto:$destinatario?subject=${URLEncoder.encode(assunto, "UTF-8").replace("+", "%20")}")
+        val intent = Intent(Intent.ACTION_SENDTO, uri)
+
+        // Verifica se há um aplicativo capaz de lidar com o Intent
         if (intent.resolveActivity(requireContext().packageManager) != null) {
             startActivity(intent)
         } else {
-            // Caso não encontre um aplicativo de e-mail compatível
-            Toast.makeText(requireContext(), "Nenhum aplicativo de e-mail encontrado", Toast.LENGTH_SHORT).show()
+            // Lida com o caso em que nenhum aplicativo de email está instalado
+            Toast.makeText(requireContext(), "Nenhum aplicativo de email encontrado.", Toast.LENGTH_SHORT).show()
         }
     }
+
+    /*fun openGmailWithSubject() {
+        val emailDestinatario = "caiooalexandre95@gmail.com" // Substitua pelo seu email de suporte
+        val assunto = "Relato de problema no app [Nome do seu app]"
+        val corpoEmail = """
+    Olá,
+
+    Gostaria de relatar o seguinte problema no app:
+      
+
+ 
+""".trimIndent()
+
+        val intent = Intent(Intent.ACTION_SENDTO).apply {
+            data = Uri.parse("mailto:$emailDestinatario")
+            putExtra(Intent.EXTRA_SUBJECT, assunto)
+            putExtra(Intent.EXTRA_TEXT, corpoEmail)
+        }
+
+        startActivity(Intent.createChooser(intent, "Enviar email com..."))
+    }*/
 
 
 }
