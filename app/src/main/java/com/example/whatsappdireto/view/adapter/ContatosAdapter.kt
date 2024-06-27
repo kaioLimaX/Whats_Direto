@@ -36,6 +36,10 @@ class ContatosAdapter(
             val dataFormatada = formato.format(contato.dataCadastro)
             binding.txtData.text = dataFormatada
 
+            binding.itemContato.setOnClickListener {
+                adapter.onClickListenerListener.onClicar(contato)
+            }
+
             binding.btnAtribuir.setOnClickListener {
                 adapter.alertAtribuir.exibir(contato.telefone, contato,adapter.onClickListenerListener)
             }
@@ -69,6 +73,13 @@ class ContatosAdapter(
         val position = listaContatos.indexOfFirst { it.idContato == contato.idContato }
         listaContatos.removeAt(position)
         notifyItemRemoved(position)
+    }
+    fun alterarContato(contato: Contato) {
+        val position = listaContatos.indexOfFirst { it.idContato == contato.idContato }
+        if (position != -1) {
+            listaContatos[position] = contato
+            notifyItemChanged(position)
+        }
     }
 
 }

@@ -36,7 +36,9 @@ class AlertAtribuir(
                 setSpan(StyleSpan(Typeface.BOLD), 0, length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE) // Aplique o estilo negrito
             }) { dialog, _ ->
                 val nome = binding.txtNomeContato.text.toString()
-                onClickListenerListener.onSalvar(nome,contato)
+                val contatoAlterado = contato
+                contatoAlterado.nome = nome
+                onClickListenerListener.onEditar(nome,contatoAlterado)
                 fechar()
             }
 

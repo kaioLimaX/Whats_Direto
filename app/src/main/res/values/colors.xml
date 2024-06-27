@@ -8,4 +8,7 @@
     <color name="color_primary">#02483e</color>
     <color name="color_status_bar">#046356</color>
 
+    <color name="switchThumbCheckedColor">#00FF00</color> <!-- Cor da bolinha quando checked (verde) -->
+    <color name="switchTrackUncheckedColor">#CCCCCC</color> <!-- Cor da trilha quando unchecked (cinza) -->
+
 </resources>

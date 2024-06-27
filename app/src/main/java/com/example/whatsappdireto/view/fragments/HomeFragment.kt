@@ -11,9 +11,12 @@ import androidx.lifecycle.lifecycleScope
 import com.example.whatsappdireto.R
 import com.example.whatsappdireto.Utils
 import com.example.whatsappdireto.controller.ContatoController
+import com.example.whatsappdireto.controller.SharedController
 import com.example.whatsappdireto.database.entity.Contato
 import com.example.whatsappdireto.databinding.FragmentHomeBinding
+import com.example.whatsappdireto.extensions.openWhatsAppChat
 import com.example.whatsappdireto.masks.MaskEditTextChangedListener
+import com.example.whatsappdireto.sharedPreferences.PreferencesManager
 import kotlinx.coroutines.launch
 import java.util.Date
 
@@ -22,6 +25,14 @@ class HomeFragment : Fragment() {
 
     private val controller by lazy {
         ContatoController(requireContext())
+    }
+
+    private val preferencesManager: PreferencesManager by lazy {
+        PreferencesManager(requireContext())
+    }
+
+    private val sharedController: SharedController by lazy {
+        SharedController(preferencesManager)
     }
 
     private var _binding: FragmentHomeBinding? = null
@@ -60,9 +71,14 @@ class HomeFragment : Fragment() {
                 Date()
             )
             lifecycleScope.launch {
-                controller.adicionarContato(contato)
+                if(sharedController.getDefaultNumber() == 1){
+                    Log.i("info_shared", "iniciarEventosClique: salvar ")
+                    controller.adicionarContato(contato)
+                }
 
             }
+            it.openWhatsAppChat(contato.telefone)
+            binding.edtPhone.setText("")
         }
     }
 

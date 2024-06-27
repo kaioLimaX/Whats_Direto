@@ -26,7 +26,7 @@ class ContatoController(
     }
 
          fun atualizarContato(contato: Contato)= CoroutineScope(Dispatchers.IO).launch {
-            contatoDAO.atualizar(contato)
+             contatoDAO.atualizar(contato)
         }
 
          fun removerContato(contato: Contato) = CoroutineScope(Dispatchers.IO).launch {

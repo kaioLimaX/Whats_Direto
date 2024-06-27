@@ -18,6 +18,7 @@ import com.example.whatsappdireto.databinding.FragmentHistoricoBinding
 import com.example.whatsappdireto.extensions.OnClickListenerListener
 import com.example.whatsappdireto.extensions.VcardUtil
 import com.example.whatsappdireto.extensions.VcardUtil.contatoParaVCard
+import com.example.whatsappdireto.extensions.openWhatsAppChat
 import com.example.whatsappdireto.view.adapter.ContatosAdapter
 import kotlinx.coroutines.launch
 import java.io.File
@@ -70,13 +71,25 @@ class HistoricoFragment : Fragment(),OnClickListenerListener {
 
     }
 
+    override fun onClicar(contato: Contato) {
+        view?.openWhatsAppChat(contato.telefone)
+    }
+
     //controle da interface do adapter
 
-    override fun onSalvar(valorEditText: String, contato: Contato) {
-        Log.i("info_teste", "onSalvar: $valorEditText")
+    override fun onEditar(valorEditText: String, contato: Contato) {
+        if(contato.nome.isNotBlank()){
+            controller.atualizarContato(contato)
+            adapter.alterarContato(contato)
+        }
     }
 
     override fun onCompartilhar(contato: Contato) {
+
+       /* para criar o botao compartilhar em vcf, você precisa criar o VCardUtil que esta nas extenções, um arquivo no res/xml
+       * para memorizar a pasta, e colocar o fileProvider no manifest
+       */
+
         val vcardString = contatoParaVCard(contato)
         val nomeArquivo = "contato_${contato.nome}.vcf"
 

@@ -10,13 +10,17 @@ import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI.setupWithNavController
 import com.example.whatsappdireto.R
 import com.example.whatsappdireto.controller.ContatoController
+import com.example.whatsappdireto.controller.SharedController
 import com.example.whatsappdireto.database.RoomDB
 import com.example.whatsappdireto.databinding.ActivityMainBinding
+import com.example.whatsappdireto.sharedPreferences.PreferencesManager
 
 class MainActivity : AppCompatActivity() {
 
 
     private lateinit var navController : NavController
+
+    private lateinit var sharedController: SharedController
 
 
     val binding by lazy {
@@ -32,17 +36,19 @@ class MainActivity : AppCompatActivity() {
         setupWithNavController(binding.bottomNavigation,navController)
 
         configToolbar()
-
-
-
-
-
-
-
-
+        iniciarSharedPreferences()
 
     }
 
+    private fun iniciarSharedPreferences() {
+        val preferencesManager = PreferencesManager(this)
+
+        // Inicialize o MainController com o PreferencesManager
+        sharedController = SharedController(preferencesManager)
+
+        // Inicialize o aplicativo (verifica a primeira execução)
+        sharedController.initializeApp()
+    }
 
 
     private fun configToolbar() {

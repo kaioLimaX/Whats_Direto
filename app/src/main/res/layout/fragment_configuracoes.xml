@@ -62,9 +62,9 @@
                 android:text="Salvar números no historico" />
 
             <Switch
-                android:id="@+id/switch1"
+                android:id="@+id/swithSalvar"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"/>
         </LinearLayout>
 
         <LinearLayout
@@ -87,7 +87,7 @@
                 android:text="Excluir todas as entradas do historico" />
 
             <ImageButton
-                android:id="@+id/imageButton"
+                android:id="@+id/btnExcluirTudo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
