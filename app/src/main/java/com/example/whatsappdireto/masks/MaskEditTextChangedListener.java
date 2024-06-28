@@ -35,7 +35,13 @@ public class MaskEditTextChangedListener implements TextWatcher {
 
     @Override
     public void onTextChanged(CharSequence s, int start, int before, int count) {
-        String str = Utils.unmask(s.toString(), symbolMask);
+        // Remove "+55" do começo da string
+        String digitsOnly = s.toString().replaceFirst("\\+55", "");
+
+        // Remove outros caracteres não numéricos
+        digitsOnly = digitsOnly.replaceAll("[^0-9]", "");
+
+        String str = Utils.unmask(digitsOnly, symbolMask);
         String mascara = "";
 
         if (isUpdating) {
@@ -44,11 +50,10 @@ public class MaskEditTextChangedListener implements TextWatcher {
             return;
         }
 
-        if(str.length() > old.length())
-            mascara = Utils.mask(mMask,str);
-
-        else
-            mascara = s.toString();
+        if (str.length() > old.length()) {
+            mascara = Utils.mask(mMask, str);
+        } else {
+            mascara = s.toString();}
 
         isUpdating = true;
 
