@@ -1,10 +1,13 @@
 package com.example.whatsappdireto.view
 
+import android.content.res.Resources
 import android.graphics.Color
+import android.graphics.drawable.InsetDrawable
 import android.os.Build
 import android.os.Bundle
 import android.text.Html
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI.setupWithNavController
@@ -58,8 +61,20 @@ class MainActivity : AppCompatActivity() {
         toolbar.setTitleTextColor(Color.WHITE)
         if (Build.VERSION.SDK_INT >= 24) {
             supportActionBar?.title = Html.fromHtml("<b>ZapDireto</b>", 0)
+
         } else {
             supportActionBar?.title = Html.fromHtml("<b>ZapDireto</b>")
+        }
+
+        // Carrega o drawable e cria um InsetDrawable com padding
+        val originalDrawable = ContextCompat.getDrawable(this, R.drawable.spy_24)
+        val insetDrawable = InsetDrawable(originalDrawable, 0, 0, 16, 0)
+
+        supportActionBar?.setIcon(insetDrawable)
+
+        fun Int.dpToPx(): Int {
+            val density = Resources.getSystem().displayMetrics.density
+            return (this * density).toInt()
         }
     }
 }

@@ -64,8 +64,15 @@ class HistoricoFragment : Fragment(),OnClickListenerListener {
         binding.rvContatos.addItemDecoration(DividerItemDecoration(requireContext(), LinearLayoutManager.VERTICAL))
 
         lifecycleScope.launch {
-            val contatos = controller.listarUsuarios()
-            adapter.atualizarContatos(contatos)
+            val listaContatos = controller.listarUsuarios()
+            if(listaContatos.isEmpty()){
+
+                binding.cvListaVazia.visibility = View.VISIBLE
+
+            }else{
+                binding.cvListaVazia.visibility = View.INVISIBLE
+                adapter.atualizarContatos(listaContatos)
+            }
         }
 
 
