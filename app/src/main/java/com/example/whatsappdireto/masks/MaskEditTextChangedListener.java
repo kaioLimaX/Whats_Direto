@@ -4,7 +4,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.EditText;
 
-import com.example.whatsappdireto.Utils;
+import com.example.utils.Utils;
 
 import java.util.HashSet;
 import java.util.Set;

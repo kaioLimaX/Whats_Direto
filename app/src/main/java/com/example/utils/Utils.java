@@ -1,4 +1,4 @@
-package com.example.whatsappdireto;
+package com.example.utils;
 
 import java.util.Set;
 
@@ -29,4 +29,5 @@ public abstract class Utils {
         }
         return maskedText;
     }
+
 }

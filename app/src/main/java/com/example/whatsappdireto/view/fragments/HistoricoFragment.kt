@@ -110,7 +110,7 @@ class HistoricoFragment : Fragment(),OnClickListenerListener {
 
         // Cria um Intent para compartilhar o arquivo
         val intent = Intent(Intent.ACTION_SEND).apply {
-            type = "text/vcard"
+            type = "text/x-vcard"
             putExtra(Intent.EXTRA_STREAM, uri)
             addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
         }
